@@ -8,10 +8,16 @@ app.use(parser.json());
 app.use(express.static("client/dist"));
 
 // GET
-app.get("/gameadata", (req, res) => res.send("Hello World!"));
+app.get("/gamedata", (req, res) => {
+  console.log("getting data");
+  res.send({ hello: "world" });
+});
 
 // POST
-app.post("/gameadata", (req, res) => res.send(req.body));
+app.post("/gamedata", (req, res) => {
+  console.log("posting data");
+  res.send(req.body);
+});
 
 let port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));

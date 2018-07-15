@@ -10,8 +10,11 @@ class App extends React.Component {
   }
 
   componentWillMount() {
-    getData();
-    postData();
+    getData("/gamedata");
+    let data = { hello: "gamedata" };
+    postData("/gamedata", data)
+      .then(data => console.log(data))
+      .catch(error => console.error(error));
   }
 
   render() {
