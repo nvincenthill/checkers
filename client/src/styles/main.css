@@ -1,3 +1,158 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
+  --main-bg-color: #222;
+  --main-font-color: #eee;
+  background: var(--main-bg-color);
+  color: var(--main-font-color);
+  font-family: Helvetica, sans-serif;
+  text-align: center;
+}
+
+#title {
+  font-size: 3.5rem;
+  letter-spacing: 0.25rem;
+  margin-top: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+#game-container {
+  display: grid;
+  grid-template-columns: [first] 15vmax [second] 10vmax [third] auto [fourth] 10vmax [fifth] 15vmax [end];
+  grid-template-rows: [first] 15vmax [second] auto [third] 15vmax [end];
+  justify-items: center;
+}
+
+#gameboard {
+  grid-column: third / fourth;
+  grid-row: second / third;
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 40vmax;
+  text-align: center;
+  align-content: center;
+  outline: 1rem solid darkgray;
+  transition: 1.25s cubic-bezier(0.18, 1.52, 0.4, 0.87);
+}
+
+.tile {
+  background: var(--main-font-color);
+  border: 1px solid var(--main-bg-color);
+  min-height: 5vmax;
+  min-width: 5vmax;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  transition: 0.5s ease-in-out;
+  z-index: 1;
+  outline: none;
+  /* box-shadow: 0 0 5px 1px var(--main-bg-color); */
+  z-index: 10;
+}
+
+.tile:hover {
+  transition: 1s cubic-bezier(0.18, 1.52, 0.4, 0.87);
+  opacity: 0.5;
+}
+
+/* .tile:nth-of-type(2n + 1) {
+  background-color: goldenrod;
+} */
+
+.token-red {
   background: red;
+  width: 4.75vmax;
+  height: 4.75vmax;
+  border-radius: 50px/50px;
+  z-index: 100;
+  /* box-shadow: inset 0 0 0 7px darkred; */
+}
+
+.token-black {
+  background: var(--main-bg-color);
+  width: 4.75vmax;
+  height: 4.75vmax;
+  border-radius: 50px/50px;
+  z-index: 100;
+  /* box-shadow: inset 0 0 0 7px black; */
+}
+
+.red {
+  color: red;
+}
+
+.title-container {
+  border-bottom: 1rem solid var(--main-font-color);
+  margin: 5rem auto;
+  max-width: 75vmin;
+}
+
+.button-container {
+  margin-top: 5rem;
+  height: 10vmax;
+}
+
+button {
+  font-family: Helvetica, sans-serif;
+  font-size: 3rem;
+  height: 10vmax;
+  width: 35vmax;
+  line-height: 3rem;
+  text-align: center;
+  padding: 0.4rem 1rem 0rem 1rem;
+  color: #eee;
+  background: #222;
+  font-weight: bold;
+  vertical-align: middle;
+  border: 0;
+  /* outline: 1rem solid var(--main-font-color); */
+  transition: 0.5s ease-in-out;
+}
+
+#start-button:hover {
+  transform: scale(1.15) translateY(2vmax);
+  transition: 0.5s cubic-bezier(0.18, 1.52, 0.4, 0.87);
+}
+
+#start-button {
+  background: green;
+  z-index: 2000;
+  transition: 0.25 ease-in-out;
+}
+
+#restart-button:hover {
+  background: red;
+  transition: 1s ease-in-out;
+  max-height: 10vmax;
+}
+
+#restart-button {
+  /* display: none; */
+  transition: 1s ease-in-out;
+}
+
+#restart-button:focus {
+  outline: none;
+}
+
+#insane-button:hover {
+  background: red;
+  transition: 1s ease-in-out;
+  max-height: 10vmax;
+}
+
+#insane-button {
+  /* display: none; */
+  transition: 1s ease-in-out;
+}
+
+#insane-button:focus {
+  outline: none;
+}
+
+.insane {
+  color: red;
+  transform: scale(1.25);
 }

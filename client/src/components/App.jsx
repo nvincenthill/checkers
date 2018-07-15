@@ -1,11 +1,21 @@
 import React from "react";
 import { getData, postData } from "./../../../helpers/helpers";
+import GameBoard from "./Gameboard.jsx";
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      hello: "Nick"
+      gamestate: [
+        [0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0]
+      ]
     };
   }
 
@@ -19,9 +29,8 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
-        <h1>Hello, world!</h1>
-        <h2>It is {this.state.hello}.</h2>
+      <div id="game-container">
+        <GameBoard gameState={this.state.gamestate} />
       </div>
     );
   }
