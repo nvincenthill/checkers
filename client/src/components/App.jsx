@@ -1,4 +1,5 @@
 import React from "react";
+import { getData, postData } from "./../../../helpers/helpers";
 
 class App extends React.Component {
   constructor(props) {
@@ -6,6 +7,11 @@ class App extends React.Component {
     this.state = {
       hello: "Nick"
     };
+  }
+
+  componentWillMount() {
+    getData();
+    postData();
   }
 
   render() {
