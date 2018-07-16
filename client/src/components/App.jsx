@@ -9,6 +9,8 @@ import GameBoard from "./Gameboard.jsx";
 class App extends React.Component {
   constructor(props) {
     super(props);
+
+    // gamestate model to handle game logic
     this.state = {
       gamestate: [
         [0, 1, 0, 1, 0, 1, 0, 1],
@@ -34,6 +36,7 @@ class App extends React.Component {
     }
   }
 
+  // fetch when component mounts
   componentWillMount() {
     getData("/gamedata");
     let data = { hello: "gamedata" };
