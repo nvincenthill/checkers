@@ -25,13 +25,13 @@
   max-width: 40vmax;
   text-align: center;
   align-content: center;
-  outline: 3rem ridge var(--main-bg-color);
+  outline: 2rem ridge var(--main-bg-color);
   /* border: 2rem solid var(--main-bg-color); */
   transition: 1.25s cubic-bezier(0.18, 1.52, 0.4, 0.87);
 }
 
 .tile {
-  background: var(--main-board-color);
+  background: var(--second-board-color);
   border: 1px solid var(--main-bg-color);
   min-height: 5vmax;
   min-width: 5vmax;
@@ -47,13 +47,43 @@
 
 .tile:hover {
   transition: 1s cubic-bezier(0.18, 1.52, 0.4, 0.87);
-  background: goldenrod;
+  background: goldenrod !important;
 }
 
-/* .tile:nth-of-type(2n + 1) {
-  background-color: goldenrod;
-} */
-
+.tile:nth-child(1),
+.tile:nth-child(3),
+.tile:nth-child(5),
+.tile:nth-child(7),
+.tile:nth-child(10),
+.tile:nth-child(12),
+.tile:nth-child(14),
+.tile:nth-child(16),
+.tile:nth-child(17),
+.tile:nth-child(19),
+.tile:nth-child(21),
+.tile:nth-child(23),
+.tile:nth-child(26),
+.tile:nth-child(28),
+.tile:nth-child(30),
+.tile:nth-child(32),
+.tile:nth-child(33),
+.tile:nth-child(35),
+.tile:nth-child(37),
+.tile:nth-child(39),
+.tile:nth-child(42),
+.tile:nth-child(44),
+.tile:nth-child(46),
+.tile:nth-child(48),
+.tile:nth-child(49),
+.tile:nth-child(51),
+.tile:nth-child(53),
+.tile:nth-child(55),
+.tile:nth-child(58),
+.tile:nth-child(60),
+.tile:nth-child(62),
+.tile:nth-child(64) {
+  background-color: var(--main-board-color);
+}
 .gamepiece-red {
   background: -webkit-repeating-radial-gradient(
     circle,
