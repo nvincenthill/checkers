@@ -1,3 +1,7 @@
+// TODO: Implement react-drag-and-drop
+// TODO: Implement react-flip-motion
+// TODO: Implement checkers game
+
 import React from "react";
 import { getData, postData } from "./../../../helpers/helpers";
 import GameBoard from "./Gameboard.jsx";
