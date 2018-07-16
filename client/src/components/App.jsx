@@ -15,8 +15,19 @@ class App extends React.Component {
         [-1, 0, -1, 0, -1, 0, -1, 0],
         [0, -1, 0, -1, 0, -1, 0, -1],
         [-1, 0, -1, 0, -1, 0, -1, 0]
-      ]
+      ],
+      isPlaying: true
     };
+
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick(row, idx) {
+    let board = this.state.gamestate.slice();
+
+    if (this.state.isPlaying) {
+      console.log(row, idx);
+    }
   }
 
   componentWillMount() {
@@ -31,7 +42,10 @@ class App extends React.Component {
     return (
       <div id="game-container">
         {/* <h1 id="title">Checkers</h1> */}
-        <GameBoard gameState={this.state.gamestate} />
+        <GameBoard
+          handleClick={this.handleClick}
+          gameState={this.state.gamestate}
+        />
       </div>
     );
   }
