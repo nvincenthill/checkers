@@ -17,6 +17,7 @@
 }
 
 #gameboard {
+  background: var(--main-bg-color);
   grid-column: third / fourth;
   grid-row: second / third;
   display: flex;
@@ -24,7 +25,8 @@
   max-width: 40vmax;
   text-align: center;
   align-content: center;
-  outline: 1rem solid var(--second-board-color);
+  outline: 3rem ridge var(--main-bg-color);
+  /* border: 2rem solid var(--main-bg-color); */
   transition: 1.25s cubic-bezier(0.18, 1.52, 0.4, 0.87);
 }
 
@@ -45,7 +47,7 @@
 
 .tile:hover {
   transition: 1s cubic-bezier(0.18, 1.52, 0.4, 0.87);
-  opacity: 0.5;
+  background: goldenrod;
 }
 
 /* .tile:nth-of-type(2n + 1) {
@@ -53,21 +55,33 @@
 } */
 
 .gamepiece-red {
-  background: red;
+  background: -webkit-repeating-radial-gradient(
+    circle,
+    red,
+    darkred 10%,
+    red 20%
+  );
+  /* background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h20L0 20z' fill='%23222222' fill-opacity='0.38' fill-rule='evenodd'/%3E%3C/svg%3E"); */
   width: 4.25vmax;
   height: 4.25vmax;
   border-radius: 50px/50px;
-  z-index: 100;
+  z-index: 10000;
   box-shadow: 0.5px 0.5px 0 darkred, 1px 1px 0 darkred, 1.5px 1.5px 0 darkred,
     2px 2px 0 darkred, 2.5px 2.5px 0 darkred, 3px 3px 0 darkred;
 }
 
 .gamepiece-black {
-  background: var(--main-bg-color);
+  background: -webkit-repeating-radial-gradient(
+    circle,
+    var(--main-bg-color),
+    black 10%,
+    var(--main-bg-color) 20%
+  );
+  /* background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h20L0 20z' fill='%23ffffff' fill-opacity='0.09' fill-rule='evenodd'/%3E%3C/svg%3E"); */
   width: 4.25vmax;
   height: 4.25vmax;
   border-radius: 50px/50px;
-  z-index: 100;
+  z-index: 10000;
   box-shadow: 0.5px 0.5px 0 black, 1px 1px 0 black, 1.5px 1.5px 0 black,
     2px 2px 0 black, 2.5px 2.5px 0 black, 3px 3px 0 black;
 }
