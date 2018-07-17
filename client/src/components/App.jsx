@@ -28,16 +28,29 @@ class App extends React.Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick(row, idx) {
+  handleClick(row, col) {
+    console.log("click");
     let board = this.state.gamestate.slice();
 
     if (this.state.isPlaying) {
-      console.log(row, idx);
+      console.log(row, col);
+      this.selectPiece(row, col, board);
     }
   }
 
+  selectPiece(row, col, board) {
+    console.log("selecting piece");
+    if (board[row][col] === 1) {
+      board[row][col] = "B";
+    } else if (board[row][col] === -1) {
+      board[row][col] = "R";
+    }
+    console.table(board);
+    this.setState({ gamestate: board });
+  }
+
   // fetch when component mounts
-  componentWillMount() {
+  componentDidMount() {
     getData("/gamedata");
     let data = { hello: "gamedata" };
     postData("/gamedata", data)
