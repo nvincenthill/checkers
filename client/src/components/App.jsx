@@ -22,7 +22,9 @@ class App extends React.Component {
         [0, -1, 0, -1, 0, -1, 0, -1],
         [-1, 0, -1, 0, -1, 0, -1, 0]
       ],
-      isPlaying: true
+      isPlaying: true,
+      isPieceSelected: false,
+      nextPlayer: "Black"
     };
 
     this.handleClick = this.handleClick.bind(this);
@@ -39,12 +41,27 @@ class App extends React.Component {
   }
 
   selectPiece(row, col, board) {
-    console.log("selecting piece");
-    if (board[row][col] === 1) {
-      board[row][col] = "B";
-    } else if (board[row][col] === -1) {
-      board[row][col] = "R";
+    if (
+      this.state.isPieceSelected === false ||
+      board[row][col] === "B" ||
+      board[row][col] === "R"
+    ) {
+      console.log("selecting piece");
+      if (board[row][col] === 1) {
+        board[row][col] = "B";
+        this.setState({ isPieceSelected: true });
+      } else if (board[row][col] === -1) {
+        board[row][col] = "R";
+        this.setState({ isPieceSelected: true });
+      } else if (board[row][col] === "B") {
+        board[row][col] = 1;
+        this.setState({ isPieceSelected: false });
+      } else if (board[row][col] === "R") {
+        board[row][col] = -1;
+        this.setState({ isPieceSelected: false });
+      }
     }
+
     console.table(board);
     this.setState({ gamestate: board });
   }

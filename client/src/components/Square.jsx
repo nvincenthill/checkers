@@ -13,6 +13,10 @@ class Square extends React.Component {
       this.setState({ colorDisplayed: "black" });
     } else if (this.props.gameState[this.props.row][this.props.index] === -1) {
       this.setState({ colorDisplayed: "red" });
+    } else if (this.props.gameState[this.props.row][this.props.index] === "R") {
+      this.setState({ colorDisplayed: "red-selected" });
+    } else if (this.props.gameState[this.props.row][this.props.index] === "B") {
+      this.setState({ colorDisplayed: "black-selected" });
     } else {
       this.setState({ colorDisplayed: null });
     }
@@ -45,7 +49,8 @@ class Square extends React.Component {
   render() {
     let RedGamePiece = <div className="gamepiece-red" />;
     let BlackGamePiece = <div className="gamepiece-black" />;
-
+    let RedGamePieceSelected = <div className="gamepiece-red selected" />;
+    let BlackGamePieceSelected = <div className="gamepiece-black selected" />;
     return (
       <div
         className="tile"
@@ -53,6 +58,12 @@ class Square extends React.Component {
       >
         {this.state.colorDisplayed === "red" ? RedGamePiece : null}
         {this.state.colorDisplayed === "black" ? BlackGamePiece : null}
+        {this.state.colorDisplayed === "red-selected"
+          ? RedGamePieceSelected
+          : null}
+        {this.state.colorDisplayed === "black-selected"
+          ? BlackGamePieceSelected
+          : null}
       </div>
     );
   }
