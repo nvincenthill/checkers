@@ -31,7 +31,6 @@ class App extends React.Component {
   }
 
   handleClick(row, col) {
-    console.log("click");
     let board = this.state.gamestate.slice();
 
     if (this.state.isPlaying) {
@@ -60,7 +59,6 @@ class App extends React.Component {
         this.selectRedPiece(row, col, board);
       }
 
-      console.table(board);
       this.setState({ gamestate: board });
     }
   }
@@ -107,46 +105,78 @@ class App extends React.Component {
         board[row][col] = -1;
         this.setState({ nextPlayer: "Black" });
       }
-
       this.refreshBoardView(board);
     }
   }
 
   refreshBoardView(board) {
     if (this.state.isPieceSelected) {
-      console.table(board);
       console.log("refreshing board");
       for (let i = 0; i < board.length; i++) {
         for (let j = 0; j < board[i].length; j++) {
           if (board[i][j] === "B" || board[i][j] === "R") {
             board[i][j] = 0;
-            this.setState({ isPieceSelected: false });
+            this.toggleSelection();
           }
         }
       }
     }
-    console.table(board);
     this.setState({ gamestate: board });
   }
 
   validateMove(row, col, board) {
     console.log("validating move");
     if (this.state.nextPlayer === "Black") {
-      console.log("black move is valid");
       return this.isValidBlackMove(row, col, board);
     } else {
-      console.log("red move is valid");
       return this.isValidRedMove(row, col, board);
     }
   }
 
   isValidBlackMove(row, col, board) {
-    if (true) {
+    if (
+      this.isValidRow(row) &&
+      this.isValidCol(col) &&
+      this.isEmpty(row, col, board)
+    ) {
+      console.log("black move is valid");
       return true;
+    }
+    // validate captures
+  }
+
+  isEmpty(row, col, board) {
+    if (board[row][col] === 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  isValidRow(row) {
+    if (
+      row === this.state.selectedRow + 1 ||
+      row === this.state.selectedRow - 1
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  isValidCol(col) {
+    if (
+      col === this.state.selectedCol + 1 ||
+      col === this.state.selectedCol - 1
+    ) {
+      return true;
+    } else {
+      return false;
     }
   }
 
   isValidRedMove(row, col, board) {
+    console.log("red move is valid");
     return true;
   }
 
