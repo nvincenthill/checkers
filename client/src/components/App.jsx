@@ -37,6 +37,7 @@ class App extends React.Component {
     if (this.state.isPlaying) {
       console.log(row, col);
       this.selectPiece(row, col, board);
+      this.movePiece(row, col, board);
     }
   }
 
@@ -47,23 +48,51 @@ class App extends React.Component {
       board[row][col] === "R"
     ) {
       console.log("selecting piece");
-      if (board[row][col] === 1) {
-        board[row][col] = "B";
-        this.setState({ isPieceSelected: true });
-      } else if (board[row][col] === -1) {
-        board[row][col] = "R";
-        this.setState({ isPieceSelected: true });
-      } else if (board[row][col] === "B") {
-        board[row][col] = 1;
-        this.setState({ isPieceSelected: false });
-      } else if (board[row][col] === "R") {
-        board[row][col] = -1;
-        this.setState({ isPieceSelected: false });
+      if (this.state.nextPlayer === "Black") {
+        if (board[row][col] === 1) {
+          board[row][col] = "B";
+          this.setState({ isPieceSelected: true });
+        } else if (board[row][col] === "B") {
+          board[row][col] = 1;
+          this.setState({ isPieceSelected: false });
+        } else if (this.state.nextPlayer === "Red") {
+          if (board[row][col] === -1) {
+            board[row][col] = "R";
+            this.setState({ isPieceSelected: true });
+          }
+        } else if (board[row][col] === "R") {
+          board[row][col] = -1;
+          this.setState({ isPieceSelected: false });
+        }
       }
     }
 
     console.table(board);
     this.setState({ gamestate: board });
+  }
+
+  movePiece(row, col, board) {
+    if (board[row][col] !== "B") {
+      if (this.state.nextPlayer === "Black") {
+        console.log("moving piece");
+        board[row][col] = 1;
+      }
+    }
+    this.refreshBoardView(board);
+  }
+
+  refreshBoardView(board) {
+    if (this.state.isPieceSelected) {
+      console.log("refreshing board");
+      for (let i = 0; i < board.length; i++) {
+        for (let j = 0; j < board[i].length; j++) {
+          if (board[i][j] === "B" || board[i][j] === "R") {
+            board[i][j] = 0;
+            this.setState({ isPieceSelected: false });
+          }
+        }
+      }
+    }
   }
 
   // fetch when component mounts
