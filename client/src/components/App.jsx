@@ -36,53 +36,85 @@ class App extends React.Component {
 
     if (this.state.isPlaying) {
       console.log(row, col);
-      this.selectPiece(row, col, board);
-      this.movePiece(row, col, board);
+      this.handlePieceSelection(row, col, board);
+      if (this.state.isPieceSelected) {
+        this.movePiece(row, col, board);
+      }
     }
   }
 
-  selectPiece(row, col, board) {
+  handlePieceSelection(row, col, board) {
     if (
       this.state.isPieceSelected === false ||
       board[row][col] === "B" ||
       board[row][col] === "R"
     ) {
-      console.log("selecting piece");
+      console.log("handling piece selection");
       if (this.state.nextPlayer === "Black") {
-        if (board[row][col] === 1) {
-          board[row][col] = "B";
-          this.setState({ isPieceSelected: true });
-        } else if (board[row][col] === "B") {
-          board[row][col] = 1;
-          this.setState({ isPieceSelected: false });
-        } else if (this.state.nextPlayer === "Red") {
-          if (board[row][col] === -1) {
-            board[row][col] = "R";
-            this.setState({ isPieceSelected: true });
-          }
-        } else if (board[row][col] === "R") {
-          board[row][col] = -1;
-          this.setState({ isPieceSelected: false });
-        }
+        console.log("selecting black piece");
+        this.selectBlackPiece(row, col, board);
       }
-    }
 
-    console.table(board);
-    this.setState({ gamestate: board });
+      if (this.state.nextPlayer === "Red") {
+        console.log("selecting red piece");
+        this.selectRedPiece(row, col, board);
+      }
+
+      console.table(board);
+      this.setState({ gamestate: board });
+    }
+  }
+
+  selectRedPiece(row, col, board) {
+    if (board[row][col] === -1) {
+      board[row][col] = "R";
+      this.toggleSelection(row, col);
+    } else if (board[row][col] === "R") {
+      board[row][col] = -1;
+      this.toggleSelection(row, col);
+    }
+  }
+
+  selectBlackPiece(row, col, board) {
+    if (board[row][col] === 1) {
+      board[row][col] = "B";
+      this.toggleSelection(row, col);
+    } else if (board[row][col] === "B") {
+      board[row][col] = 1;
+      this.toggleSelection(row, col);
+    }
+  }
+
+  toggleSelection(row, col) {
+    if (this.state.isPieceSelected) {
+      this.setState({ isPieceSelected: false });
+      this.setState({ selectedRow: null });
+      this.setState({ selectedCol: null });
+    } else {
+      this.setState({ isPieceSelected: true });
+      this.setState({ selectedRow: row });
+      this.setState({ selectedCol: col });
+    }
   }
 
   movePiece(row, col, board) {
-    if (board[row][col] !== "B") {
+    if (this.validateMove(row, col, board)) {
+      console.log("moving piece");
       if (this.state.nextPlayer === "Black") {
-        console.log("moving piece");
         board[row][col] = 1;
+        this.setState({ nextPlayer: "Red" });
+      } else {
+        board[row][col] = -1;
+        this.setState({ nextPlayer: "Black" });
       }
+
+      this.refreshBoardView(board);
     }
-    this.refreshBoardView(board);
   }
 
   refreshBoardView(board) {
     if (this.state.isPieceSelected) {
+      console.table(board);
       console.log("refreshing board");
       for (let i = 0; i < board.length; i++) {
         for (let j = 0; j < board[i].length; j++) {
@@ -93,6 +125,29 @@ class App extends React.Component {
         }
       }
     }
+    console.table(board);
+    this.setState({ gamestate: board });
+  }
+
+  validateMove(row, col, board) {
+    console.log("validating move");
+    if (this.state.nextPlayer === "Black") {
+      console.log("black move is valid");
+      return this.isValidBlackMove(row, col, board);
+    } else {
+      console.log("red move is valid");
+      return this.isValidRedMove(row, col, board);
+    }
+  }
+
+  isValidBlackMove(row, col, board) {
+    if (true) {
+      return true;
+    }
+  }
+
+  isValidRedMove(row, col, board) {
+    return true;
   }
 
   // fetch when component mounts
