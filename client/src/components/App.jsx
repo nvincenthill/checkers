@@ -126,23 +126,33 @@ class App extends React.Component {
 
   validateMove(row, col, board) {
     console.log("validating move");
-    if (this.state.nextPlayer === "Black") {
-      return this.isValidBlackMove(row, col, board);
-    } else {
-      return this.isValidRedMove(row, col, board);
-    }
+    return this.isValidMove(row, col, board);
   }
 
-  isValidBlackMove(row, col, board) {
+  isValidMove(row, col, board) {
+    // TODO: handle backwards moves and captures
+
+    // validate basic move
     if (
       this.isValidRow(row) &&
       this.isValidCol(col) &&
       this.isEmpty(row, col, board)
     ) {
-      console.log("black move is valid");
+      console.log("move is valid");
       return true;
     }
+
     // validate captures
+    if (this.isValidCapture(row, col, board)) {
+      return true;
+    }
+  }
+
+  isValidCapture(row, col, board) {
+    //TODO: validate capture only if piece is capable of capture
+    if (this.isValidCaptureRow(row) && this.isValidCaptureCol(col)) {
+      return true;
+    }
   }
 
   isEmpty(row, col, board) {
@@ -154,9 +164,25 @@ class App extends React.Component {
   }
 
   isValidRow(row) {
+    if (this.state.nextPlayer === "Red") {
+      if (row === this.state.selectedRow - 1) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      if (row === this.state.selectedRow + 1) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  }
+
+  isValidCaptureRow(row) {
     if (
-      row === this.state.selectedRow + 1 ||
-      row === this.state.selectedRow - 1
+      row === this.state.selectedRow + 2 ||
+      row === this.state.selectedRow - 2
     ) {
       return true;
     } else {
@@ -175,12 +201,17 @@ class App extends React.Component {
     }
   }
 
-  isValidRedMove(row, col, board) {
-    console.log("red move is valid");
-    return true;
+  isValidCaptureCol(col) {
+    if (
+      col === this.state.selectedCol + 2 ||
+      col === this.state.selectedCol - 2
+    ) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
-  // fetch when component mounts
   componentDidMount() {
     getData("/gamedata");
     let data = { hello: "gamedata" };
@@ -192,7 +223,6 @@ class App extends React.Component {
   render() {
     return (
       <div id="game-container">
-        {/* <h1 id="title">Checkers</h1> */}
         <GameBoard
           handleClick={this.handleClick}
           gameState={this.state.gamestate}
