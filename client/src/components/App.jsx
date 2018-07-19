@@ -96,7 +96,7 @@ class App extends React.Component {
   }
 
   movePiece(row, col, board) {
-    if (this.validateMove(row, col, board)) {
+    if (this.isValidMove(row, col, board)) {
       console.log("moving piece");
       if (this.state.nextPlayer === "Black") {
         board[row][col] = 1;
@@ -105,7 +105,9 @@ class App extends React.Component {
         board[row][col] = -1;
         this.setState({ nextPlayer: "Black" });
       }
-      this.refreshBoardView(board);
+      board = this.refreshBoardView(board);
+      console.table(board);
+      this.setState({ gamestate: board });
     }
   }
 
@@ -121,17 +123,10 @@ class App extends React.Component {
         }
       }
     }
-    this.setState({ gamestate: board });
-  }
-
-  validateMove(row, col, board) {
-    console.log("validating move");
-    return this.isValidMove(row, col, board);
+    return board;
   }
 
   isValidMove(row, col, board) {
-    // TODO: handle backwards moves and captures
-
     // validate basic move
     if (
       this.isValidRow(row) &&
@@ -141,7 +136,6 @@ class App extends React.Component {
       console.log("move is valid");
       return true;
     }
-
     // validate captures
     if (this.isValidCapture(row, col, board)) {
       return true;
@@ -187,6 +181,7 @@ class App extends React.Component {
   }
 
   isValidCaptureRow(row) {
+    // TODO: check for piece to hop over
     if (this.state.nextPlayer === "Red") {
       if (row === this.state.selectedRow - 2) {
         return true;
@@ -214,6 +209,7 @@ class App extends React.Component {
   }
 
   isValidCaptureCol(col) {
+    // TODO: check for piece to hop over
     if (
       col === this.state.selectedCol + 2 ||
       col === this.state.selectedCol - 2
