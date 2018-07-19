@@ -151,8 +151,15 @@ class App extends React.Component {
   isValidCapture(row, col, board) {
     //TODO: validate capture only if piece is capable of capture
     if (this.isValidCaptureRow(row) && this.isValidCaptureCol(col)) {
+      this.handleCapture(row, col, board);
       return true;
     }
+  }
+
+  handleCapture(row, col, board) {
+    console.table(board);
+    console.log("move from: ", this.state.selectedRow, this.state.selectedCol);
+    console.log("move to: ", row, col);
   }
 
   isEmpty(row, col, board) {
@@ -180,13 +187,18 @@ class App extends React.Component {
   }
 
   isValidCaptureRow(row) {
-    if (
-      row === this.state.selectedRow + 2 ||
-      row === this.state.selectedRow - 2
-    ) {
-      return true;
+    if (this.state.nextPlayer === "Red") {
+      if (row === this.state.selectedRow - 2) {
+        return true;
+      } else {
+        return false;
+      }
     } else {
-      return false;
+      if (row === this.state.selectedRow + 2) {
+        return true;
+      } else {
+        return false;
+      }
     }
   }
 

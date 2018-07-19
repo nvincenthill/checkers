@@ -49,8 +49,12 @@ class Square extends React.Component {
   render() {
     let RedGamePiece = <div className="gamepiece-red" />;
     let BlackGamePiece = <div className="gamepiece-black" />;
-    let RedGamePieceSelected = <div className="gamepiece-red selected" />;
-    let BlackGamePieceSelected = <div className="gamepiece-black selected" />;
+    let RedGamePieceSelected = (
+      <div className="gamepiece-red animated infinite jello" />
+    );
+    let BlackGamePieceSelected = (
+      <div className="gamepiece-black animated infinite jello" />
+    );
     return (
       <div
         className="tile"
