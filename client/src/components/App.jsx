@@ -123,6 +123,7 @@ class App extends React.Component {
         }
       }
     }
+    this.setState({ gamestate: board });
     return board;
   }
 
@@ -144,16 +145,28 @@ class App extends React.Component {
 
   isValidCapture(row, col, board) {
     //TODO: validate capture only if piece is capable of capture
-    if (this.isValidCaptureRow(row) && this.isValidCaptureCol(col)) {
+    if (
+      this.isValidCaptureRow(row) &&
+      this.isValidCaptureCol(col) &&
+      board[row][col] === 0
+    ) {
       this.handleCapture(row, col, board);
       return true;
     }
   }
 
+  removePiece(row, col, board) {
+    board[row][col] = 0;
+    this.refreshBoardView(board);
+  }
+
   handleCapture(row, col, board) {
-    console.table(board);
-    console.log("move from: ", this.state.selectedRow, this.state.selectedCol);
-    console.log("move to: ", row, col);
+    // console.log("move from: ", this.state.selectedRow, this.state.selectedCol);
+    // console.log("move to: ", row, col);
+    let rowToRemove = (this.state.selectedRow + row) / 2;
+    let colToRemove = (this.state.selectedCol + col) / 2;
+    // console.log("removing ", rowToRemove, colToRemove);
+    this.removePiece(rowToRemove, colToRemove, board);
   }
 
   isEmpty(row, col, board) {
