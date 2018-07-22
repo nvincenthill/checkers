@@ -1,6 +1,8 @@
 // TODO: Implement react-drag-and-drop
 // TODO: Implement react-flip-motion
 // TODO: Implement checkers game
+// TODO: Add promotions
+// TODO: Add multiple captures
 
 import React from "react";
 import { getData, postData } from "./../../../helpers/helpers";
@@ -194,7 +196,6 @@ class App extends React.Component {
   }
 
   isValidCaptureRow(row) {
-    // TODO: check for piece to hop over
     if (this.state.nextPlayer === "Red") {
       if (row === this.state.selectedRow - 2) {
         return true;
