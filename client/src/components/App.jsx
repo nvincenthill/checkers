@@ -108,6 +108,7 @@ class App extends React.Component {
         this.setState({ nextPlayer: "Black" });
       }
       board = this.refreshBoardView(board);
+      this.promoteKings(board);
       console.table(board);
       this.setState({ gamestate: board });
     }
@@ -146,7 +147,6 @@ class App extends React.Component {
   }
 
   isValidCapture(row, col, board) {
-    //TODO: validate capture only if piece is capable of capture
     let rowToCheck = (this.state.selectedRow + row) / 2;
     let colToCheck = (this.state.selectedCol + col) / 2;
 
@@ -158,6 +158,17 @@ class App extends React.Component {
     ) {
       this.handleCapture(row, col, board);
       return true;
+    }
+  }
+
+  promoteKings(board) {
+    for (let i = 0; i < board.length; i++) {
+      if (board[board.length - 1][i] === 1) {
+        console.log("Black king to promote");
+      }
+      if (board[0][i] === -1) {
+        console.log("Red king to promote");
+      }
     }
   }
 
