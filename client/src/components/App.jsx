@@ -147,10 +147,14 @@ class App extends React.Component {
 
   isValidCapture(row, col, board) {
     //TODO: validate capture only if piece is capable of capture
+    let rowToCheck = (this.state.selectedRow + row) / 2;
+    let colToCheck = (this.state.selectedCol + col) / 2;
+
     if (
       this.isValidCaptureRow(row) &&
       this.isValidCaptureCol(col) &&
-      board[row][col] === 0
+      board[row][col] === 0 &&
+      board[rowToCheck][colToCheck] !== 0
     ) {
       this.handleCapture(row, col, board);
       return true;
