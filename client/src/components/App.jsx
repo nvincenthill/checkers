@@ -165,11 +165,14 @@ class App extends React.Component {
     for (let i = 0; i < board.length; i++) {
       if (board[board.length - 1][i] === 1) {
         console.log("Black king to promote");
+        board[board.length - 1][i] = "BK";
       }
       if (board[0][i] === -1) {
         console.log("Red king to promote");
+        board[0][i] = "RK";
       }
     }
+    this.setState({ gamestate: board });
   }
 
   removePiece(row, col, board) {
