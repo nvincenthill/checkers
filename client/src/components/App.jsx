@@ -1,8 +1,10 @@
-// TODO: Implement react-drag-and-drop
-// TODO: Implement react-flip-motion
-// TODO: Implement checkers game
-// TODO: Add promotions
-// TODO: Add multiple captures
+// TODO: Style for mobile
+// TODO: Select kings
+// TODO: Implement double captures
+// TODO: Write tests
+// TODO: Implement king backwards movement
+// TODO: Implement win/loss/draw conditions
+// TODO: Restyle kings
 
 import React from "react";
 import { getData, postData } from "./../../../helpers/helpers";
