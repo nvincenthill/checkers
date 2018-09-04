@@ -4,18 +4,6 @@ This is my implementation of checkers or English Draughts.
 
 ## Getting Started
 
-To run server
-
-```
-npm start
-```
-
-To run webpack
-
-```
-npm run react-dev
-```
-
 ### Prerequisites
 
 All dependencies listed in package.json
@@ -28,6 +16,18 @@ To install dependencies
 
 ```
 npm install
+```
+
+To run server
+
+```
+npm start
+```
+
+To run webpack
+
+```
+npm run react-dev
 ```
 
 ## Running the tests
