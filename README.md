@@ -4,7 +4,17 @@ This is my implementation of checkers or English Draughts.
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+To run server
+
+```
+npm start
+```
+
+To run webpack
+
+```
+npm run react-dev
+```
 
 ### Prerequisites
 
